@@ -1,12 +1,4 @@
-ActivePython 2.7.18.4 (ActiveState Software Inc.) based on
-Python 2.7.18.4 (default, Aug  9 2021, 23:37:24) [MSC v.1500 32 bit (Intel)] on win32
-Type "help", "copyright", "credits" or "license()" for more information.
->>> ActivePython 2.7.18.4 (ActiveState Software Inc.) based on
-Python 2.7.18.4 (default, Aug  9 2021, 23:37:24) [MSC v.1500 32 bit (Intel)] on win32
-Type "help", "copyright", "credits" or "license()" for more information.
->>> help
-Type help() for interactive help, or help(object) for help about object.
->>> # Import some modules that we need
+# Import some modules that we need
 import imrt_robot_serial
 import signal
 import time
@@ -129,7 +121,7 @@ while not motor_serial.shutdown_now :
 	print("Dist 1:", dist_1, " Dist 2:", dist_2, " Dist 3:", dist_3, " dist_4:", dist_4)
 
 
-	#Kode for at roboten kjører rett fram helt til den møter et objekt
+	#Kode for at roboten kjÃ¸rer rett fram helt til den mÃ¸ter et objekt
 	
 	if dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 < STOP_DISTANCE:
 		drive_robot(BACKWARDS, 1)
