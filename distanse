@@ -18,7 +18,7 @@ def stop_robot(duration):
     iterations = int(duration * 10)
     
     for i in range(iterations):
-        motor_serial.send_command(0, 0)
+    	motor_serial.send_command(0, 0)
         time.sleep(0.10)
 
 
