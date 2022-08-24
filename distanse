@@ -112,7 +112,7 @@ while not motor_serial.shutdown_now :
 	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 > STOP_DISTANCE:
 		turn_robot_random_angle()
 	else:
-		drive_robot(BACKWARDS, 0.1)
+		drive_robot(FORWARDS, 0.1)
 		
 """
     # Get and print readings from distance sensors
