@@ -121,18 +121,18 @@ while not motor_serial.shutdown_now :
 	print("Dist 1:", dist_1, " Dist 2:", dist_2, " Dist 3:", dist_3, " dist_4:", dist_4)
 
 
-	#Kode for at roboten kjører rett fram helt til den møter et objekt
+	#Kode for at roboten kjører der sensorene har lengst vei
 	
-	if dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 < STOP_DISTANCE:
-		drive_robot(BACKWARDS, 1)
-	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 < STOP_DISTANCE:
+	if dist_1 > dist_2 and dist_1 > dist_3:
+		drive_robot(FORWARDS, 0.1)
+	elif dist_1 < dist_2 and dist_2 < dist_3:
 		turn_robot_right()
-	elif dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 > STOP_DISTANCE:
+	elif dist_1 < dist_2 and dist_2 > dist_3:
 		turn_robot_left()
 	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 > STOP_DISTANCE:
 		turn_robot_random_angle()
 	else:
-		drive_robot(FORWARDS, 0.1)
+		drive_robot(BACKWARDS, 0.1)
 		
 """
     # Get and print readings from distance sensors
