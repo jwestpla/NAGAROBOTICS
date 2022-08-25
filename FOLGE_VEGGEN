@@ -121,9 +121,9 @@ while not motor_serial.shutdown_now :
 
 
 
-	if dist_3 > WALLDISTANCE:
+	if dist_3 > WALL_DISTANCE:
 		drive_robot(FORWARDS, 0.1)
-	elif dist_3 > WALLDISTANCE:
+	elif dist_3 > WALL_DISTANCE:
 		turn_robot_right()
 	else:
 		drive_robot(FORWARDS, 0.1)
