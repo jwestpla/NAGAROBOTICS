@@ -120,13 +120,6 @@ while not motor_serial.shutdown_now :
 	print("Dist 1:", dist_1, " Dist 2:", dist_2, " Dist 3:", dist_3, " dist_4:", dist_4)
 
 
-
-    # Calculate commands for each motor using sensor readings
-    # In this simple example we will multiply each sensor reading
-    # with a constant to obtain our commands
-    gain = 8
-    speed_motor_1 = 
-    speed_motor_2 = dist_2 * gain
     
     
     	if dist_3 < WALL_DISTANCE:
