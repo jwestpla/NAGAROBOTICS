@@ -120,12 +120,14 @@ while not motor_serial.shutdown_now :
 	print("Dist 1:", dist_1, " Dist 2:", dist_2, " Dist 3:", dist_3, " dist_4:", dist_4)
 
 
-  	if dist_3 < WALLDISTANCE:
+
+	if dist_3 > WALLDISTANCE:
 		drive_robot(FORWARDS, 0.1)
-  	elif dist_3 > WALLDISTANCE:
-    		turn_robot_right()
-  	else:
-	   	drive_robot(FORWARDS, 0.1)
+	elif dist_3 > WALLDISTANCE:
+		turn_robot_right()
+	else:
+		drive_robot(FORWARDS, 0.1)
+	
                 
 
 
