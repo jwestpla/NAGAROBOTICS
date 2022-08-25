@@ -64,7 +64,7 @@ def turn_robot_right():
       time.sleep(0.10)
 
 
-# We want our program to send commands at 10 Hz (10 commands per second)
+# We want our program to send commands at 20 Hz (20 commands per second)
 execution_frequency = 20 #Hz
 execution_period = 1. / execution_frequency #seconds
 
