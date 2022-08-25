@@ -12,7 +12,7 @@ FORWARDS = 1
 BACKWARDS = -1
 DRIVING_SPEED = 100
 TURNING_SPEED = 100
-STOP_DISTANCE = 25
+STOP_DISTANCE = 5
 WALL_DISTANCE = 15
 
 def stop_robot(duration):
@@ -127,7 +127,18 @@ while not motor_serial.shutdown_now :
     gain = 8
     speed_motor_1 = 
     speed_motor_2 = dist_2 * gain
-        
+    
+    
+    	if dist_3 < WALL_DISTANCE:
+		drive_robot(FORWARDS, 0.1)
+	elif dist_1 < dist_2 and dist_2 < dist_3:
+		turn_robot_right()
+	elif dist_1 < dist_2 and dist_2 > dist_3:
+		turn_robot_left()
+	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 > STOP_DISTANCE:
+		turn_robot_random_angle()
+	else:
+		drive_robot(FORWARDS, 0.1)
                 
 
 
