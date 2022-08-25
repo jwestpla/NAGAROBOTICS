@@ -44,6 +44,24 @@ def turn_robot_random_angle():
         motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
         time.sleep(0.10)
 
+def turn_robot_left():
+    
+    direction = 1
+    iterations = 19
+
+    for i in range(iterations):
+      time.sleep(0.10)
+      motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
+
+
+def turn_robot_right():
+
+    direction = -1
+    iterations = 19
+
+    for i in range(iterations):
+      motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
+      time.sleep(0.10)
 
 
 # We want our program to send commands at 10 Hz (10 commands per second)
