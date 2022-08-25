@@ -121,14 +121,10 @@ while not motor_serial.shutdown_now :
 
     
 
-	if dist_1 > dist_2 and dist_1 > dist_3:
-		drive_robot(FORWARDS, 0.1)
-	elif dist_1 < dist_2 and dist_2 < dist_3:
+	if dist_2 < TURNING_DISTANCE:
 		turn_robot_right()
-	elif dist_1 < dist_2 and dist_2 > dist_3:
+	elif dist_3 < TURNING_DISTANCE:
 		turn_robot_left()
-	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 > STOP_DISTANCE:
-		turn_robot_random_angle()
 	else:
 		drive_robot(FORWARDS, 0.1)
 
