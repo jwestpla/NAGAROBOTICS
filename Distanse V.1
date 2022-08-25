@@ -12,94 +12,41 @@ LEFT = -1
 RIGHT = 1
 FORWARDS = 1
 BACKWARDS = -1
-DRIVING_SPEED = 100
-TURNING_SPEED = 100
-STOP_DISTANCE = 25
+DRIVING_SPEED = 150
+TURNING_SPEED = 150
+STOP_DISTANCE = 20
+TURNING_DISTANCE = 30
 
-def solve_maze():
-    """
-    	N
-    W		E
-    	S
-    
-    UP 	 	(N)	- maze.get_neighbours()[0][1]
-    RIGHT 	(E)	- maze.get_neighbours()[1][2]
-    DOWN 	(S) - maze.get_neighbours()[2][1]
-    LEFT 	(W) - maze.get_neighbours()[1][0]
-    
-    """
-    
-    facing = "S"
-    
-    while maze.is_maze_solved() == False:
-        
-        left_wall = get_left_wall(facing)
-        front_wall = get_front_wall(facing)
-        
-        if left_wall != 1:
-            #facing = rotate_cw(facing)
-            facing = rotate_facing(facing, "CCW")
-            step_where_facing(facing)
-            continue
-        elif front_wall != 1:
-            step_where_facing(facing)
-            continue
-        else:
-            #facing = rotate_ccw(facing)
-            facing = rotate_facing(facing, "CW")
-            continue
-    else:
-        print ("GOTCHA")
+def stop_robot(duration):
 
-		
-def get_left_wall(facing):
-    if facing == "N":
-        return maze.get_neighbours()[1][0]
-    elif facing == "E":
-        return maze.get_neighbours()[0][1]
-    elif facing == "S":
-        return maze.get_neighbours()[1][2]
-    elif facing == "W":
-        return maze.get_neighbours()[2][1]
+    iterations = int(duration * 10)
     
-def get_front_wall(facing):
-    if facing == "N":
-        return maze.get_neighbours()[0][1]
-    elif facing == "E":
-        return maze.get_neighbours()[1][2]
-    elif facing == "S":
-        return maze.get_neighbours()[2][1]
-    elif facing == "W":
-        return maze.get_neighbours()[1][0]
-    
-def step_where_facing(facing):
-    if facing == "N":
-        maze.up()
-    elif facing == "E":
-        maze.right()
-    elif facing == "S":
-        maze.down()
-    elif facing == "W":
-        maze.left()
-    
-def rotate_facing(facing, rotation):
+    for i in range(iterations):
+        motor_serial.send_command(0, 0)
+        time.sleep(0.10)
 
-    directions = ["N", "E", "S", "W"]
-    facindex = directions.index(facing)
-    
-    if rotation == "CW":
-        if facindex == len(directions) - 1:
-            return directions[0]
-        else:
-            return directions[facindex + 1]
-        
-    elif rotation == "CCW":
-        if facindex == 0:
-            return directions[-1]
-        else:
-            return directions[facindex - 1]
 
-solve_maze()
+
+def drive_robot(direction, duration):
+    
+    speed = DRIVING_SPEED * direction
+    iterations = int(duration * 10)
+
+    for i in range(iterations):
+        motor_serial.send_command(speed, speed)
+        time.sleep(0.10)
+
+
+
+def turn_robot_random_angle():
+
+    direction = random.choice([-1,1])
+    iterations = random.randint(10, 25)
+    
+    for i in range(iterations):
+        motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
+        time.sleep(0.10)
+
 
 
 # We want our program to send commands at 10 Hz (10 commands per second)
@@ -152,10 +99,12 @@ while not motor_serial.shutdown_now :
     # Get and print readings from distance sensors
     dist_1 = motor_serial.get_dist_1()
     dist_2 = motor_serial.get_dist_2()
-    print("Dist 1:", dist_1, "   Dist 2:", dist_2)
+    dist_3 = motor_serial.get_dist_3()
+    dist_4 = motor_serial.get_dist_4()
+    print("Dist 1:", dist_1, "Dist 2:", dist_2, "Dist 3:", dist_3, "Dist 4:", dist_4)
 
     # Check if there is an obstacle in the way
-    if dist_1 < STOP_DISTANCE or dist_2 < STOP_DISTANCE:
+    if dist_2 < STOP_DISTANCE or dist_3 < STOP_DISTANCE:
         # There is an obstacle in front of the robot
         # First let's stop the robot for 1 second
         print("Obstacle!")
@@ -165,12 +114,12 @@ while not motor_serial.shutdown_now :
         drive_robot(BACKWARDS, 0.5)
 
         # Turn random angle
-        turn_robot_random_angle()
+        turn_robot_random_angle(1)
         
 
     else:
         # If there is nothing in front of the robot it continus driving forwards
-        drive_robot(FORWARDS, 0.1)
+        drive_robot(FORWARDS, 0.5)
 
 
         
