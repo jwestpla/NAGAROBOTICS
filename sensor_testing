@@ -59,6 +59,7 @@ while not motor_serial.shutdown_now :
     # Get and print readings from distance sensors
     dist_1 = motor_serial.get_dist_1()
     dist_2 = motor_serial.get_dist_2()
+    dist_3 = motor_serial.get_dist_3()
     print("Dist 1:", dist_1, "   Dist 2:", dist_2)
 
     
@@ -66,7 +67,7 @@ while not motor_serial.shutdown_now :
     # Calculate commands for each motor using sensor readings
     # In this simple example we will multiply each sensor reading
     # with a constant to obtain our commands
-    gain = 8
+    gain = 4
     speed_motor_1 = dist_1 * gain
     speed_motor_2 = dist_2 * gain
 
