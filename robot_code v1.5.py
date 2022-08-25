@@ -45,6 +45,7 @@ motor_serial.run()
 
 
 def calculate_compensation(dist_2, dist_3, is_left): 
+    pass
     if is_left: 
         return (dist_3 * abs(dist_2 - dist_3)) / COMPENSATION_GAIN
     else:
@@ -67,7 +68,7 @@ def drive_robot(direction, duration):
     iterations = int(duration * 10)
 
     for i in range(iterations):
-        motor_serial.send_command(speed + LEFT_MOTOR_COMPENSATION, speed + RIGHT_MOTOR_COMPENSATION)
+        motor_serial.send_command(speed + (dist_3 * abs(dist_2 - dist_3)) / COMPENSATION_GAIN, speed + (dist_2 * abs(dist_2 - dist_3))  / COMPENSATION_GAIN)
         time.sleep(0.10)
 
 # Definerer handlinger
@@ -119,8 +120,8 @@ while not motor_serial.shutdown_now :
     print("Dist 1:", dist_1, " Dist 2:", dist_2, " Dist 3:", dist_3, " dist_4:", dist_4)
 
     
-    LEFT_MOTOR_COMPENSATION = calculate_compensation(dist_2, dist_3, is_left = True)
-    RIGHT_MOTOR_COMPENSATION = calculate_compensation(dist_2, dist_3, is_left = False)
+    # midlewrtidig: LEFT_MOTOR_COMPENSATION = calculate_compensation(dist_2, dist_3, is_left = True)
+    # midlertidig: RIGHT_MOTOR_COMPENSATION = calculate_compensation(dist_2, dist_3, is_left = False)
  
     
     if dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 < STOP_DISTANCE:
