@@ -11,7 +11,7 @@ FORWARDS = 1
 BACKWARDS = -1
 DRIVING_SPEED = 100
 TURNING_SPEED = 100
-STOP_DISTANCE = 25
+STOP_DISTANCE = 15
 
 def stop_robot(duration):
 
@@ -67,10 +67,10 @@ def turn_robot_right():
 def Oppretning_hoyre():
 
     direction = 1
-    iterations = 2
+    iterations = 4
 
     for i in range(iterations):
-      motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * 0)
+      motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
       time.sleep(0.10)
 
 def Oppretning_venstre():
