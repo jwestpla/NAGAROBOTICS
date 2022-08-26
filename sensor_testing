@@ -122,12 +122,12 @@ while not motor_serial.shutdown_now :
 
     
 
-	if dist_2 < TURNING_DISTANCE:
-		turn_robot_right()
-	elif dist_3 < TURNING_DISTANCE:
-		turn_robot_left()
-	else:
-		drive_robot(FORWARDS, 0.1)
+    # Calculate commands for each motor using sensor readings
+    # In this simple example we will multiply each sensor reading
+    # with a constant to obtain our commands
+    gain = 2
+    speed_motor_1 = dist_2 * gain
+    speed_motor_2 = dist_3 * gain
 
 
     # Here we pause the execution of the program for the apropriate amout of time
