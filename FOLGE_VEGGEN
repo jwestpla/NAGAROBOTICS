@@ -12,8 +12,8 @@ FORWARDS = 1
 BACKWARDS = -1
 DRIVING_SPEED = 100
 TURNING_SPEED = 100
-STOP_DISTANCE = 5
-WALL_DISTANCE = 15
+STOP_DISTANCE = 25
+WALL_DISTANCE = 20
 
 def stop_robot(duration):
 
@@ -62,6 +62,24 @@ def turn_robot_right():
 
     for i in range(iterations):
       motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * direction)
+      time.sleep(0.10)
+
+def Oppretning_hoyre():
+
+    direction = 1
+    iterations = 4
+
+    for i in range(iterations):
+      motor_serial.send_command(TURNING_SPEED * direction, -TURNING_SPEED * 0)
+      time.sleep(0.10)
+
+def Oppretning_venstre():
+
+    direction = -1
+    iterations = 4
+
+    for i in range(iterations):
+      motor_serial.send_command(TURNING_SPEED * 0, -TURNING_SPEED * direction)
       time.sleep(0.10)
 
 
@@ -121,10 +139,21 @@ while not motor_serial.shutdown_now :
 
 
 
-	if dist_3 > WALL_DISTANCE:
-		drive_robot(FORWARDS, 0.1)
-	elif dist_3 > WALL_DISTANCE:
+	if dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 < STOP_DISTANCE:
+		time.sleep(0.5)
+		drive.robot(BACKWARDS, 1)
+	elif dist_1 < STOP_DISTANCE and dist_2 > STOP_DISTANCE and dist_3 < STOP_DISTANCE:
+		time.sleep(0.5)
 		turn_robot_right()
+	elif dist_1 < STOP_DISTANCE and dist_2 < STOP_DISTANCE and dist_3 > STOP_DISTANCE:
+		time.sleep(0.5)
+		turn_robot_left()
+	elif dist_3 > WALL_DISTANCE and dist_1 > STOP_DISTANCE:
+		drive_robot(FORWARDS, 0.1)
+	elif dist_3 > WALL_DISTANCE and dist_1 >STOP_DISTANCE:
+		Oppretning_hoyre()
+	elif dist_3 < WALL_DISTANCE and dist_1 >STOP_DISTANCE:
+		Oppretning_vesntre()
 	else:
 		drive_robot(FORWARDS, 0.1)
 	
