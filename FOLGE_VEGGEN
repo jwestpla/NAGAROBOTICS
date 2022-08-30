@@ -10,7 +10,7 @@ LEFT = -1
 RIGHT = 1
 FORWARDS = 1
 BACKWARDS = -1
-DRIVING_SPEED = 100
+DRIVING_SPEED = 150
 TURNING_SPEED = 100
 STOP_DISTANCE = 25
 min_wall_dist = 20
@@ -150,9 +150,9 @@ while not motor_serial.shutdown_now :
 		turn_robot_left()
 	elif dist_4 == WALL_DISTANCE and dist_1 > STOP_DISTANCE:
 		drive_robot(FORWARDS, 0.1)
-	elif dist_4 > WALL_DISTANCE and dist_1 >STOP_DISTANCE:
+	elif dist_4 > max_wall_dist and dist_1 >STOP_DISTANCE:
 		Oppretning_hoyre()
-	elif dist_4 < WALL_DISTANCE and dist_1 >STOP_DISTANCE:
+	elif dist_4 < min_wall_dist and dist_1 >STOP_DISTANCE:
 		Oppretning_vesntre()
 	else:
 		drive_robot(FORWARDS, 0.1)
