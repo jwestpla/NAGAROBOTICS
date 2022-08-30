@@ -153,9 +153,9 @@ while not motor_serial.shutdown_now :
 	elif dist_4 == WALL_DISTANCE and dist_1 > STOP_DISTANCE:
 		drive_robot(FORWARDS, 0.1)
 	elif dist_4 > max_wall_dist and dist_1 >STOP_DISTANCE:
-		Oppretning_hoyre()
-	elif dist_4 < min_wall_dist and dist_1 >STOP_DISTANCE:
 		Oppretning_venstre()
+	elif dist_4 < min_wall_dist and dist_1 >STOP_DISTANCE:
+		Oppretning_hoyre()
 	else:
 		drive_robot(FORWARDS, 0.1)
 	
